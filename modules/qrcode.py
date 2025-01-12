@@ -12,7 +12,6 @@ def func_qr_generator(data_xml: dict):
   directory_qr_imgs = str(os.getcwd()) + '/qr_imgs'
 
   for k, i in data_xml.items():
-
     name_png = i.get('Сетевое имя')
     qr = qrcode.QRCode(version=1, box_size=5, border=1)
 
@@ -23,5 +22,6 @@ def func_qr_generator(data_xml: dict):
     try:
       qr.make(fit=True)
       qr.make_image().save(os.path.join(directory_qr_imgs, f'{name_png}.png'))
-    except:
+    except Exception as error:
+      #print(error)
       print(f"Файл {k}.png не удалось сохранить.")
